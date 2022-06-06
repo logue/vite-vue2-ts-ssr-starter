@@ -1,21 +1,21 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "vite-vue2-ts-starter",
+  "name": "vite-vue2-ts-ssr-starter",
   "private": true,
-  "version": "0.4.8",
-  "description": "Vue2 TypeScript Startar project for Vite.",
+  "version": "0.0.1",
+  "description": "Vue2 SSR TS Starter project for Vite.",
   "author": {
     "name": "Logue",
     "email": "logue@hotmail.co.jp",
     "url": "https://logue.dev/"
   },
-  "homepage": "https://github.com/logue/vite-vue2-ts-starter",
+  "homepage": "https://github.com/logue/vite-vue2-ts-ssr-starter",
   "repository": {
     "type": "git",
-    "url": "git@github.com:logue/vite-vue2-ts-starter.git"
+    "url": "git@github.com:logue/vite-vue2-ts-ssr-starter.git"
   },
   "bugs": {
-    "url": "https://github.com/logue/vite-vue2-ts-starter/issues"
+    "url": "https://github.com/logue/vite-vue2-ts-ssr-starter/issues"
   },
   "engines": {
     "node": ">=16.15.0",
@@ -24,28 +24,35 @@
   "packageManager": "yarn@3.2.1",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
+    "dev": "NODE_ENV=development node server",
+    "dev:prod": "NODE_ENV=production node server",
     "clean": "rimraf ./node_modules/.vite",
     "lint": "eslint . --fix --cache --cache-location ./node_modules/.vite/vite-plugin-eslint && prettier . -w -u",
     "lint:style": "stylelint \"./**/*.{css,sass,scss,htm,html,vue}\" --fix --cache-location ./node_modules/.vite/vite-plugin-stylelint  && prettier  \"./**/*.{css,sass,scss,htm,html,vue}\" -w -u",
     "lint:markup": "vue-tsc --noEmit",
-    "build": "vue-tsc --noEmit && vite build",
-    "build:analyze": "vue-tsc --noEmit && vite build --mode analyze",
+    "build": "vue-tsc --noEmit && npm run build:client && npm run build:server",
+    "build:client": "vue-tsc --noEmit && vite build --outDir dist/client --ssrManifest",
+    "build:server": "vue-tsc --noEmit && vite build --outDir dist/server --ssr src/entry-server.js",
+    "build:analyze": "vue-tsc --noEmit && vite build --outDir dist/client --ssrManifest --mode analyze && vite build --outDir dist/server --ssr src/entry-server.js --mode analyze",
     "build:clean": "rimraf dist",
     "preview": "vite preview",
     "prepare": "husky install"
   },
   "dependencies": {
     "@vue/composition-api": "^1.6.2",
+    "express": "^4.18.1",
+    "serve-static": "^1.15.0",
     "vue": "^2.6.14",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.5.3",
+    "vue-server-renderer": "^2.6.14",
     "vue2-helpers": "^1.1.7",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@types/eslint": "^8.4.2",
+    "@types/express": "^4.17.13",
     "@types/node": "^17.0.40",
     "@types/webfontloader": "^1.6.34",
     "@typescript-eslint/eslint-plugin": "^5.27.0",

@@ -1,16 +1,13 @@
-import VueRouter, { type RouteConfig } from 'vue-router';
 import Vue from 'vue';
-
-import HomePage from '@/views/HomePage.vue';
+import VueRouter, { RouteConfig } from 'vue-router';
 
 Vue.use(VueRouter);
 
-/** Router Configure */
 const routes: RouteConfig[] = [
   {
     path: '/',
     name: 'Home',
-    component: HomePage,
+    component: () => import('@/views/HomePage.vue'),
   },
   {
     path: '/about',
@@ -18,13 +15,12 @@ const routes: RouteConfig[] = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ '@/views/AboutPage.vue'),
+    component: () => import('@/views/AboutPage.vue'),
   },
 ];
 
 export default new VueRouter({
   base: import.meta.env.BASE_URL,
-  mode: 'history', // abstract, hash, history
+  mode: 'history',
   routes,
 });

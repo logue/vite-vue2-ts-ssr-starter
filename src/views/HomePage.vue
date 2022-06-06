@@ -6,7 +6,7 @@
       height="200"
       Width="200"
     />
-    <hello-world msg="Welcome to Your Vue.js + TypeScript App" />
+    <hello-world msg="Vite SSR App with vue-server-renderer" />
   </div>
 </template>
 

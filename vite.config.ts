@@ -9,7 +9,7 @@ import fs from 'fs';
 export default defineConfig(async ({ mode }): Promise<UserConfig> => {
   const config: UserConfig = {
     // https://vitejs.dev/config/#base
-    base: './',
+    base: '/',
     // Resolver
     resolve: {
       // https://vitejs.dev/config/#resolve-alias
@@ -44,8 +44,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
         typescript: true,
         vueTsc: true,
         eslint: {
-          lintCommand:
-            'eslint ./src/ --fix --cache --cache-location ./node_modules/.vite/vite-plugin-eslint', // for example, lint .ts & .tsx
+          lintCommand: 'eslint', // for example, lint .ts & .tsx
         },
       }),
       // compress assets
@@ -57,6 +56,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
     build: {
       rollupOptions: {
         output: {
+          /*
           manualChunks: {
             // Split external library from transpiled code.
             vue: [
@@ -71,6 +71,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
               '@vue/composition-api',
             ],
           },
+          */
           plugins: [
             mode === 'analyze'
               ? // rollup-plugin-visualizer

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/favicon.ico" />
-    <title>vite-vue2-ts-starter</title>
+    <!-- use triple mustache for non-HTML-escaped interpolation -->
+    {{{ meta }}}
+    <!-- use double mustache for HTML-escaped interpolation -->
+    <title>{{ title }}</title>
   </head>
-
   <body>
-    <div id="app">
-      We're sorry but this site doesn't work properly without JavaScript
-      enabled. Please enable it to continue.
-    </div>
-    <script type="module" src="/src/main.ts"></script>
+    <!--vue-ssr-outlet-->
+    <script type="module" src="/src/entry-client.ts"></script>
+    <script>
+      // prettier-ignore
+      window.__INITIAL_STATE__ = '<!--vuex-state-->';
+    </script>
   </body>
 </html>
