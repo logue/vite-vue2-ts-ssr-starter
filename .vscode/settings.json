@@ -1,0 +1,13 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "stylelint.validate": [
+    "css",
+    "less",
+    "postcss",
+    "vue"
+  ],
+  "volar.icon.preview": true
+}

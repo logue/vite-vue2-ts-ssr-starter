@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "stylelint.vscode-stylelint",
+    "vue.volar"
+  ],
+  "unwantedRecommendations": [
+    "octref.vetur"
+  ]
+}
