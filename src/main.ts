@@ -1,8 +1,6 @@
 /** Vue main script */
-import VueCompositionAPI from '@vue/composition-api';
 import Vue from 'vue';
 
-Vue.use(VueCompositionAPI);
 Vue.config.productionTip = false;
 
 import App from './App.vue';

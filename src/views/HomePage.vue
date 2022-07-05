@@ -4,48 +4,61 @@
       alt="Vue logo"
       :src="require('@/assets/logo.svg')"
       height="200"
-      Width="200"
+      width="200"
     />
     <hello-world msg="Vite SSR App with vue-server-renderer" />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { defineComponent, ref, watch, type Ref, type SetupContext } from 'vue';
+// import { useStore } from '@logue/vue2-helpers/dist/vuex';
+import { useRoute } from '@logue/vue2-helpers/vue-router';
 
 import HelloWorld from '@/components/HelloWorld.vue';
 
-@Component({ components: { HelloWorld } })
 /** Home Component */
-export default class HomePage extends Vue {
-  /*
-  // Props
-  @Prop({ type: String, default: 'prop' })
-  readonly prop: string = 'prop';
+export default defineComponent({
+  /** Components */
+  components: {
+    HelloWorld,
+  },
+  /** Props */
+  props: {
+    prop: { type: String, default: 'prop' },
+  },
+  /**
+   * Setup
+   *
+   * @param _props - Props
+   * @param _context - Context
+   */
+  setup(_props, _context: SetupContext) {
+    /** Route */
+    const route = useRoute();
+    /** Vuex */
+    // const store = useStore();
 
-  // Model and Data
-  data: string | null = null;
+    const data: Ref<string | undefined> = ref();
 
-  // Computed
-  get computed(): string {
-    return this.$store.getters.computed;
-  }
+    /* *
+     * Computed
+     * /
+    const computedValue: Ref<string> = computed({
+      get: () => store.getters.computedValue,
+      set: v => store.dispatch('setComputedValue', v)
+    }
+     */
 
-  // Watch
-  @Watch('$route', { immediate: true })
-  onRouteChanged(): void {
-    // ...
-  }
+    // Watch
+    watch(
+      () => route?.name,
+      name => console.log('route is changed:', name)
+    );
 
-  // created or mounted etc.
-  created(): void {
-    // ...
-  }
-
-  // Methods
-  methods(): string {
-    return 'method';
-  }
-  */
-}
+    return {
+      data,
+    };
+  },
+});
 </script>

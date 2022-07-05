@@ -1,3 +1,5 @@
+/* eslint-disable tsdoc/syntax */
+/* eslint-disable no-undef */
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
@@ -17,11 +19,10 @@ async function createServer(root = process.cwd()) {
       () => import('./dist/client/ssr-manifest.json')
     : {};
 
+  /** @type {import('express').Express} */
   const app = express();
 
-  /**
-   * @type {import('vite').ViteDevServer}
-   */
+  /** @type {import('vite').ViteDevServer} */
   let vite;
   if (!isProd) {
     vite = await require('vite').createServer({
@@ -79,7 +80,7 @@ async function createServer(root = process.cwd()) {
 
 createServer().then(({ app }) =>
   app.listen(3000, () => {
-    console.log('http://localhost:3000');
+    console.log('⚡Launch SSR: http://localhost:3000');
   })
 );
 

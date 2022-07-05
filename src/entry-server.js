@@ -1,11 +1,12 @@
+/* eslint-disable tsdoc/syntax */
 import { createRenderer } from 'vue-server-renderer';
 import { app, router, store } from './main';
 
 /**
  * Render by Server
  *
- * @param {RawLocation} url - URL
- * @param {*} manifest -
+ * @param {import('vue-router').RawLocation} url - URL
+ * @param {*} manifest - Manifest file.
  * @param {string} template - Template file.
  */
 export function render(url, manifest, template) {
@@ -17,6 +18,7 @@ export function render(url, manifest, template) {
       const matchedComponents = router.getMatchedComponents();
       // no matched routes
       if (!matchedComponents.length) {
+        // eslint-disable-next-line prefer-promise-reject-errors
         return reject({ code: 404 });
       }
       const renderer = createRenderer({
@@ -24,8 +26,10 @@ export function render(url, manifest, template) {
         template,
       });
       const context = {
-        title: 'Test',
-        meta: `<meta name="description" content="TEST"/>`,
+        title: import.meta.env.VITE_APP_TITLE || 'Vue APP',
+        meta: `<meta name="description" content="${
+          import.meta.env.VITE_APP_DESCRIPTION
+        }"/>`,
       };
       const state = JSON.stringify(store.state);
 

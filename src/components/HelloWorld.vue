@@ -13,11 +13,11 @@
       <br />
       check out the
       <a
-        href="https://github.com/underfin/vite-plugin-vue2#readme"
+        href="https://github.com/vitejs/vite-plugin-vue2#readme"
         target="_blank"
         rel="noopener"
       >
-        vite-plugin-vue2 documentation
+        vite-plugin-vue2
       </a>
       .
     </p>
@@ -35,24 +35,6 @@
       </li>
       <li>
         <a
-          href="https://github.com/ModyQyW/vite-plugin-eslint"
-          target="_blank"
-          rel="noopener"
-        >
-          eslint
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/ModyQyW/vite-plugin-stylelint"
-          target="_blank"
-          rel="noopener"
-        >
-          stylelint
-        </a>
-      </li>
-      <li>
-        <a
           href="https://vitejs.dev/guide/features.html#typescript"
           target="_blank"
           rel="noopener"
@@ -62,11 +44,20 @@
       </li>
       <li>
         <a
-          href="https://github.com/vuejs/composition-api"
+          href="https://github.com/fi3ework/vite-plugin-checker"
           target="_blank"
           rel="noopener"
         >
-          @vue/composition-api
+          vite-plugin-checker
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://github.com/btd/rollup-plugin-visualizer"
+          target="_blank"
+          rel="noopener"
+        >
+          rollup-plugin-visualizer
         </a>
       </li>
     </ul>
@@ -93,6 +84,15 @@
       <li>
         <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
       </li>
+      <li>
+        <a
+          href="https://github.com/vuejs/awesome-vue"
+          target="_blank"
+          rel="noopener"
+        >
+          awesome-vue
+        </a>
+      </li>
     </ul>
     <h3>Ecosystem</h3>
     <ul>
@@ -107,44 +107,17 @@
         </a>
       </li>
       <li>
+        <a
+          href="https://github.com/logue/vue2-helpers"
+          target="_blank"
+          rel="noopener"
+        >
+          @logue/vue2-helpers
+        </a>
+      </li>
+      <li>
         <a href="https://devtools.vuejs.org/" target="_blank" rel="noopener">
           vue-devtools
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://class-component.vuejs.org/"
-          target="_blank"
-          rel="noopener"
-        >
-          vue-class-component
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/kaorun343/vue-property-decorator"
-          target="_blank"
-          rel="noopener"
-        >
-          vue-property-decorator
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/composition-api"
-          target="_blank"
-          rel="noopener"
-        >
-          vue2-composition-api
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-          rel="noopener"
-        >
-          awesome-vue
         </a>
       </li>
     </ul>
@@ -152,21 +125,32 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { defineComponent, ref, type Ref, type SetupContext } from 'vue';
 
 import type MetaInterface from '@/interfaces/MetaInterface';
 import Meta from '@/Meta';
 
-@Component
 /** HelloWorld Component */
-export default class HelloWorld extends Vue {
-  /** Meta information */
-  readonly meta: MetaInterface = Meta;
+export default defineComponent({
+  props: {
+    /** Prop message */
+    msg: { type: String, required: true },
+  },
+  /**
+   * Setup
+   *
+   * @param _props - Props
+   * @param _context - Context
+   */
+  setup(_props, _context: SetupContext) {
+    /** Meta information */
+    const meta: Ref<MetaInterface> = ref(Meta);
 
-  /** Prop message */
-  @Prop()
-  readonly msg!: string;
-}
+    return {
+      meta,
+    };
+  },
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
