@@ -9,7 +9,7 @@ import fs from 'fs';
 export default defineConfig(async ({ mode }): Promise<UserConfig> => {
   const config: UserConfig = {
     // https://vitejs.dev/config/#base
-    base: '/',
+    base: './',
     // Resolver
     resolve: {
       // https://vitejs.dev/config/#resolve-alias

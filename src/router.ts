@@ -1,9 +1,12 @@
-import type { RouteConfig } from 'vue-router';
-import type VueRouter from 'vue-router';
-import { createRouter } from '@logue/vue2-helpers/vue-router';
+/** Vue Router Configure */
+import {
+  createRouter,
+  type Router,
+  type RouteRecordRaw,
+} from '@logue/vue2-helpers/vue-router';
 
 /** Router Configure */
-const routes: RouteConfig[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Home',
@@ -12,14 +15,11 @@ const routes: RouteConfig[] = [
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import('@/views/AboutPage.vue'),
   },
 ];
 
-const router: VueRouter = createRouter({
+const router: Router = createRouter({
   base: import.meta.env.BASE_URL,
   mode: 'history', // abstract, hash, history
   routes,
